@@ -11,16 +11,12 @@ import (
 
 func (a *Auth) SignIn(name, code string, duration time.Duration) error {
 	var user *User
-	if res := a.db.First(&user, "name = ?", name); res.Error != nil {
+	if res := a.db.First(&user, "name = ? and code = ?", name, code); res.Error != nil {
 		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
 			return ErrWrongCredentials
 		}
 		fmt.Fprintf(os.Stderr, "could not find user: %s", res.Error)
 		return ErrInternal
-	}
-
-	if user.Code != code {
-		return ErrWrongCredentials
 	}
 
 	res := a.db.
