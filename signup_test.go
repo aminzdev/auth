@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"github.com/aminzdev/db"
 	"testing"
 )
@@ -40,7 +41,7 @@ func TestAuth_SignUp(t *testing.T) {
 		}
 	}
 	for _, name := range invalidUserNames {
-		if err = auth.SignUp(name, "pass"); err == nil {
+		if err = auth.SignUp(name, "pass"); !errors.Is(err, ErrInvalidUserName) {
 			t.Fatalf("expected error %s but got: %s", ErrInvalidUserName, err)
 		}
 	}
