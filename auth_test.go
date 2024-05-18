@@ -34,7 +34,7 @@ func TestAuth(t *testing.T) {
 	}
 	t.Log("signing out ...")
 	time.Sleep(time.Second)
-	if err = auth.SignOut("user"); err != nil {
+	if err = auth.SignOut("user", "pass"); err != nil {
 		t.Fatal(err)
 	}
 	t.Log("signing in ...")
@@ -44,7 +44,7 @@ func TestAuth(t *testing.T) {
 	}
 	t.Log("signing out ...")
 	time.Sleep(time.Second)
-	if err = auth.SignOut("user"); err != nil {
+	if err = auth.SignOut("user", "pass"); err != nil {
 		t.Fatal(err)
 	}
 }
